@@ -15,7 +15,9 @@ import matplotlib.pyplot as plt
 
 class_path = "/home/ali/VOCdevkit/VOC2012_light/voc.names"
 num_class=20
-trained_mode_path='/home/ali/PycharmProjects/yolo/out/save_model/ep00006_loss10455845552783360.0000_lr0.4.pth.tar'
+#trained_mode_path='/home/ali/PycharmProjects/yolo/out/save_model/ep00006_loss10455845552783360.0000_lr0.4.pth.tar'
+trained_mode_path='/home/ali/PycharmProjects/yolo/out/save_model/ckpt_e401dd2_ep00400_loss3.2541_lr0.00095.pth.tar'
+
 input_width=448
 input_height=448
 objness_threshold = 0.3
