@@ -1,0 +1,4 @@
+pottedplant 0.67 540 582 683 720
+pottedplant 0.68 18 307 147 655
+pottedplant 0.74 311 490 460 681
+person 0.75 100 431 251 720

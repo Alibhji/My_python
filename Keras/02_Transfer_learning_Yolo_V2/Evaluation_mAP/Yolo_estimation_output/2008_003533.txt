@@ -1,0 +1,4 @@
+person 0.62 90 222 916 711
+baseball glove 0.67 526 136 716 215
+sports ball 0.78 480 105 585 140
+person 0.83 519 86 985 568

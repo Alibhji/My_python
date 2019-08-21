@@ -1,0 +1,4 @@
+laptop 0.41 713 23 943 134
+fire hydrant 0.42 274 88 487 328
+pottedplant 0.51 1009 1 1212 47
+pottedplant 0.68 978 105 1227 460

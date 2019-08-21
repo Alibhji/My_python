@@ -1,0 +1,5 @@
+pottedplant 0.36 992 551 1254 711
+pottedplant 0.39 394 483 498 567
+pottedplant 0.58 554 500 677 591
+pottedplant 0.75 882 522 996 635
+umbrella 0.82 825 0 1142 172

@@ -1,0 +1,3 @@
+traffic light 0.31 829 104 855 141
+traffic light 0.41 819 27 857 73
+truck 0.45 262 63 728 287

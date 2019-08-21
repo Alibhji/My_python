@@ -124,65 +124,136 @@ scores, boxes, classes = yolo_eval(yolo_outputs, input_image_shape)
 Pascal_VOC_2012_Path= 'C:\\Users\\alibh\\VOCdevkit'
 
 import numpy as np
-import cv2
 from PIL import Image
-from io import BytesIO
+from io import BytesIO  
 
-cap = cv2.VideoCapture(0)
 
-while(True):
-    # Capture frame-by-frame
-    ret, frame = cap.read()
+Pascal_VOC_2012_root= 'C:\\Users\\alibh\\VOCdevkit\\VOC2012\\'
+annotation_foler='Annotations'
+images_folder='JPEGImages'
 
-    # Our operations on the frame come here
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-   
-    # Display the resulting frame
-    # cv2.imshow('frame',frame)
-    # cv2.imshow('gray',gray)
-    img = Image.fromarray(frame)
-    new_width  = 1280
-    new_height = 720
-    img = img.resize((new_width, new_height), Image.BICUBIC)
-    frame = np.array(img)
-    model_image_size = (608, 608)
-    resized_image = img.resize(tuple(reversed(model_image_size)), Image.BICUBIC)
-    image_data = np.array(resized_image, dtype='float32')
-    image_data /= 255.
-    image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
-    b = BytesIO()
-    img.save(b,format="jpeg")
-    image=Image.open(b)
-    out_scores, out_boxes, out_classes = sess.run([scores, boxes, classes], feed_dict={yolo_model.input: image_data,
-                                                                                input_image_shape: [image.size[1], image.size[0]],
-                                                                                K.learning_phase(): 0})
+Evaluation_path='.\\Evaluation_mAP\\'
+Yolo_Estimation_output_fldr='Yolo_estimation_output'
+
+if os.path.exists(os.path.join(os.getcwd(),Evaluation_path+Yolo_Estimation_output_fldr)):
+    pass
+else:
+    os.system('mkdir -p '+ os.path.join(os.getcwd(),Evaluation_path+Yolo_Estimation_output_fldr))
+    # print('...[Command][mkdir]'+ 'The {} directory is created.'.format(args['output']) )
+
+Pascal_annotation_path=os.path.join(Pascal_VOC_2012_root,images_folder)
+
+for file in os.listdir(Pascal_annotation_path):
+    if not file.startswith('.'): ## do not include hidden folders/files
+        # print(file)
+        img= Image.open(os.path.join(Pascal_VOC_2012_root+images_folder,file))
+        new_width  = 1280
+        new_height = 720
+        img = img.resize((new_width, new_height), Image.BICUBIC)
+        frame = np.array(img)
+        model_image_size = (608, 608)
+        resized_image = img.resize(tuple(reversed(model_image_size)), Image.BICUBIC)
+        image_data = np.array(resized_image, dtype='float32')
+        image_data /= 255.
+        image_data = np.expand_dims(image_data, 0)  # Add batch dimension.    
+        b = BytesIO()
+        img.save(b,format="jpeg")
+        image=Image.open(b)
+        out_scores, out_boxes, out_classes = sess.run([scores, boxes, classes], feed_dict={yolo_model.input: image_data,
+                                                                            input_image_shape: [image.size[1], image.size[0]],
+                                                                            K.learning_phase(): 0})   
+        obj=[]
+        for i, c in reversed(list(enumerate(out_classes))):
+            predicted_class = class_names[c]
+            box = out_boxes[i]
+            score = out_scores[i]
+            top, left, bottom, right = box
+            top = max(0, np.floor(top + 0.5).astype('int32'))
+            left = max(0, np.floor(left + 0.5).astype('int32'))
+            bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
+            right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
+            label = '{} {:.2f} {} {} {} {}'.format(predicted_class, score, left, top, right, bottom)
+            # print(label) 
+            obj.append(label)
+        print('-----------------------')
+        print(obj)
+        with open(os.path.join(Evaluation_path+Yolo_Estimation_output_fldr,file.split('.')[0]+'.txt'),'w') as f:
+            for row in obj:
+                f.write('{}\n'.format(row))
+            
     
-    colors = generate_colors(class_names)
-    # draw_boxes(image, out_scores, out_boxes, out_classes, class_names, colors)
-    for i, c in reversed(list(enumerate(out_classes))):
-        predicted_class = class_names[c]
-        box = out_boxes[i]
-        score = out_scores[i]
-        top, left, bottom, right = box
-        top = max(0, np.floor(top + 0.5).astype('int32'))
-        left = max(0, np.floor(left + 0.5).astype('int32'))
-        bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
-        right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
-        label = '{} {:.2f} {} {} {} {}'.format(predicted_class, score, left, top, right, bottom)
-        print(label)
         
         
-    # image = np.array(image)
-    # cv2.imshow('RGB image',image)
-    # cv2.imshow('RGB image',frame)
+        
+    # with open(os.path.join(Evaluation_path+Yolo_Estimation_output_fldr,file.split('.')[0]+'.txt'),'w') as f:
+    #     for row in rows:
+    #         # scale box position to [0,1]
+    #         # row is [class_name xmin ymin xmax ymax width height depth difficult] 
+    #         row[1]=row[1]/row[5]
+    #         row[3]=row[3]/row[5]
+    #         row[2]=row[2]/row[6]
+    #         row[4]=row[4]/row[6]
+    #         # remove difficult images
+    #         if row[8]=='1':
+    #             continue
+    #         f.write('{}\n'.format(row))
+
+
+
+
+# while(True):
+#     # Capture frame-by-frame
+#     ret, frame = cap.read()
+
+#     # Our operations on the frame come here
+#     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+   
+#     # Display the resulting frame
+#     # cv2.imshow('frame',frame)
+#     # cv2.imshow('gray',gray)
+#     img = Image.fromarray(frame)
+#     new_width  = 1280
+#     new_height = 720
+#     img = img.resize((new_width, new_height), Image.BICUBIC)
+#     frame = np.array(img)
+#     model_image_size = (608, 608)
+#     resized_image = img.resize(tuple(reversed(model_image_size)), Image.BICUBIC)
+#     image_data = np.array(resized_image, dtype='float32')
+#     image_data /= 255.
+#     image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
+#     b = BytesIO()
+#     img.save(b,format="jpeg")
+#     image=Image.open(b)
+#     out_scores, out_boxes, out_classes = sess.run([scores, boxes, classes], feed_dict={yolo_model.input: image_data,
+#                                                                                 input_image_shape: [image.size[1], image.size[0]],
+#                                                                                 K.learning_phase(): 0})
+    
+#     colors = generate_colors(class_names)
+#     # draw_boxes(image, out_scores, out_boxes, out_classes, class_names, colors)
+#     for i, c in reversed(list(enumerate(out_classes))):
+#         predicted_class = class_names[c]
+#         box = out_boxes[i]
+#         score = out_scores[i]
+#         top, left, bottom, right = box
+#         top = max(0, np.floor(top + 0.5).astype('int32'))
+#         left = max(0, np.floor(left + 0.5).astype('int32'))
+#         bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
+#         right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
+#         label = '{} {:.2f} {} {} {} {}'.format(predicted_class, score, left, top, right, bottom)
+#         print(label)
+        
+        
+#     # image = np.array(image)
+#     # cv2.imshow('RGB image',image)
+#     # cv2.imshow('RGB image',frame)
      
 
-    # if cv2.waitKey(20) & 0xFF == ord('q'):
-    #     break
+#     # if cv2.waitKey(20) & 0xFF == ord('q'):
+#     #     break
 
-# When everything done, release the capture
-cap.release()
-cv2.destroyAllWindows()
+# # When everything done, release the capture
+# cap.release()
+# cv2.destroyAllWindows()
 
 
 # import freenect

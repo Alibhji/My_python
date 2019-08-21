@@ -1,0 +1,9 @@
+traffic light 0.31 284 0 367 52
+cell phone 0.33 378 359 417 384
+backpack 0.35 604 350 804 539
+traffic light 0.47 978 184 1070 268
+bicycle 0.63 91 549 386 718
+person 0.70 523 253 891 697
+traffic light 0.70 849 0 954 115
+person 0.76 45 268 469 697
+person 0.86 783 150 1068 720
