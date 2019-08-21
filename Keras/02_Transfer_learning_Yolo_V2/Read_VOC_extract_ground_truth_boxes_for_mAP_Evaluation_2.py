@@ -78,7 +78,7 @@ for i,file in enumerate(os.listdir(Pascal_annotation_path)):
             
             if len(row)!=9:
                 continue
-            if row[8]=='1':
+            if row[8]==1:
                 continue
             f.write('{}\n'.format(row))
         
