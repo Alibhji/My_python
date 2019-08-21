@@ -1,2 +1,0 @@
-refrigerator 0.42 539 309 777 609
-tvmonitor 0.53 30 106 572 628

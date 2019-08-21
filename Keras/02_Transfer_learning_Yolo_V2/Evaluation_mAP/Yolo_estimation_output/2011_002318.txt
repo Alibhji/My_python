@@ -1,0 +1,3 @@
+bottle 0.63 20 33 293 608
+pottedplant 0.66 538 41 770 155
+pottedplant 0.73 368 13 531 104

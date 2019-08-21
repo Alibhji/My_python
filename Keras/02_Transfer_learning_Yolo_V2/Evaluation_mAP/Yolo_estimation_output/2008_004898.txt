@@ -1,0 +1,5 @@
+tvmonitor 0.64 438 45 615 143
+tvmonitor 0.69 614 32 780 140
+bottle 0.70 41 184 133 316
+tvmonitor 0.71 198 16 443 193
+keyboard 0.77 252 273 598 325

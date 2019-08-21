@@ -36,7 +36,7 @@ with tf.Session() as test_a:
     box_confidence = tf.random_normal([19, 19, 5, 1], mean=1, stddev=4, seed = 1)
     boxes = tf.random_normal([19, 19, 5, 4], mean=1, stddev=4, seed = 1)
     box_class_probs = tf.random_normal([19, 19, 5, 80], mean=1, stddev=4, seed = 1)
-    scores, boxes, classes = yolo_filter_boxes(box_confidence, boxes, box_class_probs, threshold = 0.5)
+    scores, boxes, classes = yolo_filter_boxes(box_confidence, boxes, box_class_probs, threshold = 0.6)
     print("scores[2] = " + str(scores[2].eval()))
     print("boxes[2] = " + str(boxes[2].eval()))
     print("classes[2] = " + str(classes[2].eval()))
@@ -79,7 +79,7 @@ with tf.Session() as test_b:
     print("boxes.shape = " + str(boxes.eval().shape))
     print("classes.shape = " + str(classes.eval().shape))
 
-def yolo_eval(yolo_outputs, image_shape = (720., 1280.), max_boxes=100, score_threshold=0.3, iou_threshold=0.3):    
+def yolo_eval(yolo_outputs, image_shape = (720., 1280.), max_boxes=10, score_threshold=0.6, iou_threshold=0.5):    
     # Retrieve outputs of the YOLO model (≈1 line)
     box_confidence, box_xy, box_wh, box_class_probs = yolo_outputs
     # Convert boxes to be ready for filtering functions 
@@ -113,26 +113,38 @@ class_names = read_classes("model_data/coco_classes.txt")
 anchors = read_anchors("model_data/yolo_anchors.txt")
 image_shape = (720., 1280.) 
 
-
-yolo_model = load_model("..\\..\\..\\Model\\yolo.h5")
+# # Windows
+# yolo_model = load_model("..\\..\\..\\Model\\yolo.h5")
+# Linux-Ubuntu
+yolo_model = load_model("../../../Model/yolo.h5")
 # yolo_model.summary()
-yolo_model.save('..\\..\\..\\Model\\yolo_model.h5')
+
+# # Windows
+# yolo_model.save('..\\..\\..\\Model\\yolo_model.h5')
+# Linux-Ubuntu
+yolo_model.save('../../../Model/yolo_model.h5')
 yolo_outputs = yolo_head(yolo_model.output, anchors, len(class_names))
 input_image_shape = K.placeholder(shape=(2, ))
 scores, boxes, classes = yolo_eval(yolo_outputs, input_image_shape)
 
-Pascal_VOC_2012_Path= 'C:\\Users\\alibh\\VOCdevkit'
 
 import numpy as np
 from PIL import Image
 from io import BytesIO  
+import time
 
+# # Windows
+# Pascal_VOC_2012_root= 'C:\\Users\\alibh\\VOCdevkit\\VOC2012\\'
+# Linux-Ubuntu
+Pascal_VOC_2012_root= '/home/ali/VOCdevkit/VOC2012/'
 
-Pascal_VOC_2012_root= 'C:\\Users\\alibh\\VOCdevkit\\VOC2012\\'
 annotation_foler='Annotations'
 images_folder='JPEGImages'
 
-Evaluation_path='.\\Evaluation_mAP\\'
+# # Windows
+# Evaluation_path='.\\Evaluation_mAP\\'
+Evaluation_path='./Evaluation_mAP/'
+# Linux-Ubuntu
 Yolo_Estimation_output_fldr='Yolo_estimation_output'
 
 if os.path.exists(os.path.join(os.getcwd(),Evaluation_path+Yolo_Estimation_output_fldr)):
@@ -143,9 +155,10 @@ else:
 
 Pascal_annotation_path=os.path.join(Pascal_VOC_2012_root,images_folder)
 
-for file in os.listdir(Pascal_annotation_path):
+for counter,file in enumerate(os.listdir(Pascal_annotation_path)):
     if not file.startswith('.'): ## do not include hidden folders/files
         # print(file)
+        Time_Start=time.time()
         img= Image.open(os.path.join(Pascal_VOC_2012_root+images_folder,file))
         new_width  = 1280
         new_height = 720
@@ -175,12 +188,16 @@ for file in os.listdir(Pascal_annotation_path):
             label = '{} {:.2f} {} {} {} {}'.format(predicted_class, score, left, top, right, bottom)
             # print(label) 
             obj.append(label)
-        print('-----------------------')
-        print(obj)
+        # print('-----------------------')
+        # print(obj)
+        
         with open(os.path.join(Evaluation_path+Yolo_Estimation_output_fldr,file.split('.')[0]+'.txt'),'w') as f:
             for row in obj:
                 f.write('{}\n'.format(row))
-            
+
+        Time_End=time.time()   
+        elapsed_time= Time_End-Time_Start
+        print('{:05d} {}--> time: {:0.3f}s'.format(counter,file,elapsed_time))
     
         
         

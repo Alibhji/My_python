@@ -1,0 +1,4 @@
+aeroplane 0.71 851 381 978 433
+aeroplane 0.71 1012 377 1173 426
+aeroplane 0.73 645 383 794 429
+aeroplane 0.77 332 338 496 385

@@ -1,0 +1,4 @@
+refrigerator 0.64 978 60 1280 655
+keyboard 0.65 637 417 917 591
+tvmonitor 0.67 536 125 927 449
+person 0.80 152 227 724 708

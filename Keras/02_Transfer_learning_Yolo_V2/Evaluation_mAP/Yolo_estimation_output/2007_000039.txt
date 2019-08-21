@@ -1,3 +1,2 @@
-refrigerator 0.46 0 40 333 672
 keyboard 0.81 315 506 855 714
 tvmonitor 0.89 404 181 884 538

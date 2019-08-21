@@ -1,5 +1,1 @@
-traffic light 0.38 857 344 929 431
-traffic light 0.40 1127 348 1206 437
-traffic light 0.48 1075 344 1147 440
-person 0.60 867 367 1099 583
 person 0.81 58 164 404 716

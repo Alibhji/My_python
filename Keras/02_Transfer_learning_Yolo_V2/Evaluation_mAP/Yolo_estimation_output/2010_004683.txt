@@ -1,0 +1,4 @@
+pottedplant 0.65 607 155 672 236
+pottedplant 0.74 184 324 469 579
+pottedplant 0.77 16 316 202 554
+dog 0.88 428 113 1023 527

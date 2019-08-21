@@ -1,0 +1,2 @@
+pottedplant 0.63 518 141 626 221
+wine glass 0.67 75 512 178 607

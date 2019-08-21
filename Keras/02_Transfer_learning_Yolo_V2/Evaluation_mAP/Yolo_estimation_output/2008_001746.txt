@@ -1,8 +1,3 @@
-fire hydrant 0.30 126 257 149 319
-stop sign 0.36 728 194 806 255
-stop sign 0.41 824 178 873 213
-car 0.55 8 227 91 279
-traffic light 0.59 199 59 256 141
 car 0.65 641 203 725 241
 person 0.67 211 41 694 700
 traffic light 0.68 73 0 166 145

@@ -1,6 +1,3 @@
-pottedplant 0.33 708 220 834 486
-pottedplant 0.38 290 254 443 462
-chair 0.46 166 321 339 551
 pottedplant 0.72 404 237 564 400
 pottedplant 0.73 530 453 745 596
 pottedplant 0.78 580 247 739 424

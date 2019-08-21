@@ -1,0 +1,5 @@
+baseball glove 0.69 753 290 895 362
+person 0.69 1176 11 1280 231
+person 0.79 681 49 1241 680
+baseball bat 0.84 471 332 647 515
+person 0.87 59 57 578 653

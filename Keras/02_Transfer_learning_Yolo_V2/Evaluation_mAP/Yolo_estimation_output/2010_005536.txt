@@ -1,0 +1,3 @@
+banana 0.68 56 100 266 260
+pottedplant 0.82 138 476 565 710
+pottedplant 0.87 718 34 986 178

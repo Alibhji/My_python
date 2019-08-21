@@ -1,0 +1,2 @@
+refrigerator 0.63 738 253 895 485
+diningtable 0.81 3 563 434 717

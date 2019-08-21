@@ -1,0 +1,4 @@
+tvmonitor 0.65 818 4 1109 208
+keyboard 0.68 446 598 817 704
+tvmonitor 0.68 715 346 1008 578
+tvmonitor 0.76 73 51 318 209

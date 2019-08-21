@@ -1,4 +1,1 @@
-suitcase 0.32 0 389 222 550
-traffic light 0.32 369 26 412 65
-handbag 0.44 931 214 1277 345
 person 0.82 179 41 721 675

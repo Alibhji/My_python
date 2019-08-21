@@ -1,0 +1,4 @@
+wine glass 0.62 780 11 1014 204
+cake 0.66 888 6 965 60
+wine glass 0.69 469 13 726 168
+diningtable 0.71 0 0 1280 720

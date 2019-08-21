@@ -1,4 +1,2 @@
-pottedplant 0.42 990 340 1126 451
-umbrella 0.44 985 296 1155 341
 motorbike 0.78 578 315 885 628
 motorbike 0.79 238 277 627 678

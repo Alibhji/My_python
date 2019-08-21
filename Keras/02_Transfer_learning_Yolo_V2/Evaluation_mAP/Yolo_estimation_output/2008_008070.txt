@@ -1,0 +1,2 @@
+diningtable 0.75 46 271 1221 720
+pottedplant 0.81 915 0 1266 363

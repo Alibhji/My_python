@@ -1,0 +1,2 @@
+motorbike 0.82 952 0 1274 276
+fire hydrant 0.88 595 220 963 597

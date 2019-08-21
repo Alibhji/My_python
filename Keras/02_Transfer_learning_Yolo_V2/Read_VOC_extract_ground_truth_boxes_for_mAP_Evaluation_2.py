@@ -45,12 +45,17 @@ def extract_single_xml_file(tree):
     # print('\n')
     #row_list---> [class_name xmin ymin xmax ymax width height depth difficult] 
     return(row_list)
+# # Windows
+# Pascal_VOC_2012_root= 'C:\\Users\\alibh\\VOCdevkit\\VOC2012\\'
+# Linux-Ubuntu
+Pascal_VOC_2012_root= '/home/ali/VOCdevkit/VOC2012/'
 
-Pascal_VOC_2012_root= 'C:\\Users\\alibh\\VOCdevkit\\VOC2012\\'
 annotation_foler='Annotations'
 images_folder='JPEGImages'
-
-Evaluation_path='.\\Evaluation_mAP\\'
+# # Windows
+# Evaluation_path='.\\Evaluation_mAP\\'
+# Linux-Ubuntu
+Evaluation_path='./Evaluation_mAP/'
 GT_fldr='ground-truth'
 
 if os.path.exists(os.path.join(os.getcwd(),Evaluation_path+GT_fldr)):
