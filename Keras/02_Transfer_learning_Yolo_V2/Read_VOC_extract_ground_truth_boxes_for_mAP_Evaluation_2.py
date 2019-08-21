@@ -29,16 +29,19 @@ def extract_single_xml_file(tree):
         yc=ymin+ymax/2.0
         w=xmax-xmin
         h=ymax-ymin 
+
+        if difficult ==1:
+            continue
         
         obj.append(name)
         obj.append(Xc)
         obj.append(yc)
         obj.append(w)
         obj.append(h)
-        obj.append(width)
-        obj.append(height)
-        obj.append(depth)       
-        obj.append(difficult)
+        # obj.append(width)
+        # obj.append(height)
+        # obj.append(depth)       
+        # obj.append(difficult)
         Nobj += 1
         row_list.append(obj)
     row["Nobj"] = Nobj
@@ -81,10 +84,12 @@ for i,file in enumerate(os.listdir(Pascal_annotation_path)):
             # row[4]=row[4]/row[6]
             # remove difficult images
             
-            if len(row)!=9:
+            if len(row)!=5:
                 continue
-            if row[8]==1:
-                continue
-            f.write('{}\n'.format(row))
+            # if row[8]==1:
+            #     continue
+            label = "{} {} {} {} {}".format(row[0], row[1],row[2],row[3],row[4])
+            # print(label)
+            f.write('{}\n'.format(label))
         
 
