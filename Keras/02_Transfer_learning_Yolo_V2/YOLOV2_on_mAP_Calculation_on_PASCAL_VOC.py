@@ -79,7 +79,7 @@ with tf.Session() as test_b:
     print("boxes.shape = " + str(boxes.eval().shape))
     print("classes.shape = " + str(classes.eval().shape))
 
-def yolo_eval(yolo_outputs, image_shape = (720., 1280.), max_boxes=10, score_threshold=0.6, iou_threshold=0.5):    
+def yolo_eval(yolo_outputs, image_shape = (720., 1280.), max_boxes=10, score_threshold=0.4, iou_threshold=0.4):    
     # Retrieve outputs of the YOLO model (≈1 line)
     box_confidence, box_xy, box_wh, box_class_probs = yolo_outputs
     # Convert boxes to be ready for filtering functions 
@@ -160,9 +160,9 @@ for counter,file in enumerate(os.listdir(Pascal_annotation_path)):
         # print(file)
         Time_Start=time.time()
         img= Image.open(os.path.join(Pascal_VOC_2012_root+images_folder,file))
-        new_width  = 1280
-        new_height = 720
-        img = img.resize((new_width, new_height), Image.BICUBIC)
+        # new_width  = 1280
+        # new_height = 720
+        # img = img.resize((new_width, new_height), Image.BICUBIC)
         frame = np.array(img)
         model_image_size = (608, 608)
         resized_image = img.resize(tuple(reversed(model_image_size)), Image.BICUBIC)
@@ -198,8 +198,16 @@ for counter,file in enumerate(os.listdir(Pascal_annotation_path)):
         Time_End=time.time()   
         elapsed_time= Time_End-Time_Start
         print('{:05d} {}--> time: {:0.3f}s'.format(counter,file,elapsed_time))
+        # if counter==10:
+        #     break
     
         
+
+# import cv2
+
+# file='2008_000190'
+
+# img__=cv2.imread(Pascal_VOC_2012_root+images_folder+file+'jpg')
         
         
     # with open(os.path.join(Evaluation_path+Yolo_Estimation_output_fldr,file.split('.')[0]+'.txt'),'w') as f:

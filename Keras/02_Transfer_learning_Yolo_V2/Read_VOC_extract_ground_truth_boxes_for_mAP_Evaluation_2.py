@@ -33,11 +33,19 @@ def extract_single_xml_file(tree):
         if difficult ==1:
             continue
         
+        # obj.append(name)
+        # obj.append(Xc)
+        # obj.append(yc)
+        # obj.append(w)
+        # obj.append(h)
+
         obj.append(name)
-        obj.append(Xc)
-        obj.append(yc)
-        obj.append(w)
-        obj.append(h)
+        
+        obj.append(xmin)
+        obj.append(ymin)
+        obj.append(xmax)
+        obj.append(ymax)
+
         # obj.append(width)
         # obj.append(height)
         # obj.append(depth)       

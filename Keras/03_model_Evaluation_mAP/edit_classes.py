@@ -1,8 +1,12 @@
 import  os
-path='.\\input\\ground-truth'
-path='.\\input\\detection-results'
+# path='.\\input\\ground-truth'
+# path='.\\input\\detection-results'
 # path='.\\input\\1'
-path_o='.\\input\\out'
+# path_o='.\\input\\out'
+
+path='./input/ground-truth'
+# path='./input/detection-results'
+path_o='./input/out'
 for counter,file in enumerate(os.listdir(path)):
     
     with open(os.path.join(path,file), 'r') as f:

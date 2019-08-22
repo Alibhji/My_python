@@ -47,7 +47,11 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 GT_PATH = os.path.join(os.getcwd(), 'input', 'ground-truth')
 DR_PATH = os.path.join(os.getcwd(), 'input', 'detection-results')
 # if there are no images then no animation can be shown
-IMG_PATH = os.path.join(os.getcwd(), 'input', 'images-optional')
+# IMG_PATH = os.path.join(os.getcwd(), 'input', 'images-optional')
+Pascal_VOC_2012_root= '/home/ali/VOCdevkit/VOC2012/'
+images_folder='JPEGImages'
+IMG_PATH=(os.path.join(Pascal_VOC_2012_root,images_folder))
+
 if os.path.exists(IMG_PATH): 
     for dirpath, dirnames, files in os.walk(IMG_PATH):
         if not files:
@@ -642,7 +646,7 @@ with open(results_files_path + "/results.txt", 'w') as results_file:
                 cv2.putText(img_cumulative, class_name, (bb[0],bb[1] - 5), font, 0.6, color, 1, cv2.LINE_AA)
                 # show image
                 cv2.imshow("Animation", img)
-                cv2.waitKey(90000) # show for 20 ms
+                cv2.waitKey(20) # show for 20 ms
                 # save image to results
                 output_img_path = results_files_path + "/images/detections_one_by_one/" + class_name + "_detection" + str(idx) + ".jpg"
                 cv2.imwrite(output_img_path, img)

@@ -1,6 +1,4 @@
-pictureframe 206 248 278 335
-heater 205 173 424 296
-pottedplant 330 231 396 330
-tvmonitor 2 10 205 293
-vase 335 281 376 329
-coffeetable 205 305 563 476
+cow 341.0 102.0 500.0 406.0
+person 36.0 34.0 79.0 123.0
+person 2.0 44.0 36.0 120.0
+person 29.0 42.0 41.0 64.0

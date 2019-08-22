@@ -1,2 +1,1 @@
-wastecontainer 528 213 602 300
-nightstand 47 115 84 199
+tvmonitor 156.0 89.0 344.0 279.0

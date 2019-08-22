@@ -1,7 +1,3 @@
-pottedplant 520 9 623 89
-chair 501 88 636 308
-diningtable 1 227 263 479
-chair 312 87 356 196
-tvmonitor 425 58 468 79
-tvmonitor 483 51 511 74
-windowblind 576 3 638 84
+motorbike 54.0 25.0 454.0 315.0
+motorbike 318.0 37.0 489.0 161.0
+person 369.0 1.0 458.0 130.0
