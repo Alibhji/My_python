@@ -82,6 +82,9 @@ sess = K.get_session()
 
 class_names = read_classes("model_data/coco_classes.txt")
 anchors = read_anchors("model_data/yolo_anchors.txt")
+
+print('$$$$$$$$$$$$$$$$$$$$$$$$$$',os.path.expanduser('./voc12.txt'))
+# print('-------------->',yolo_classes)
 # image_shape = (720., 1280.) 
 
 # # # Windows

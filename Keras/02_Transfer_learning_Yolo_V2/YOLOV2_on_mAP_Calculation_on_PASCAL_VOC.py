@@ -123,6 +123,28 @@ yolo_model = load_model("../../../Model/yolo.h5")
 # yolo_model.save('..\\..\\..\\Model\\yolo_model.h5')
 # Linux-Ubuntu
 yolo_model.save('../../../Model/yolo_model.h5')
+
+for layer in yolo_model.layers:
+    print(layer, layer.trainable)
+    
+    
+from keras.preprocessing.image import  ImageDataGenerator
+
+
+train_datagen = ImageDataGenerator(
+      rescale=1./255,
+      rotation_range=20,
+      width_shift_range=0.2,
+      height_shift_range=0.2,
+      horizontal_flip=True,
+      fill_mode='nearest')    
+validation_datagen = ImageDataGenerator(rescale=1./255)
+# Change the batchsize according to your system RAM
+train_batchsize = 100
+val_batchsize = 10
+
+    
+
 yolo_outputs = yolo_head(yolo_model.output, anchors, len(class_names))
 input_image_shape = K.placeholder(shape=(2, ))
 scores, boxes, classes = yolo_eval(yolo_outputs, input_image_shape)

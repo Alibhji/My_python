@@ -11,7 +11,7 @@ from collections import OrderedDict
 pascal_voc_root='/home/ali/VOCdevkit/VOC2012'
 image_fldr='JPEGImages'
 annotation_foler='Annotations'
-tf_writer_name='voc12_tf_record'
+tf_writer_name='../../../Model/voc12_tf.record'
 
 
 voc12_image_dir=os.path.join(pascal_voc_root,image_fldr)
@@ -30,6 +30,8 @@ class generate_tf_records:
                 example_obj= self.genrate_tf_exapmle_obj_from_img(img)
                 writer.write(example_obj.SerializeToString())
                 print('image {:05d}/ {}  --> {}'.format(i,len(self.imgs_voc12),img.split('/')[-1]))
+                if i==200:
+                    break
         
         
     def get_image_absoulte_path(self, dataset_path):
@@ -41,9 +43,9 @@ class generate_tf_records:
         
         shape=img.shape
         shape=list(shape)
-        # rows=tf.train.Int64List(value=[shape[0]])
-        # cols=tf.train.Int64List(value=[shape[1]])
-        # channels=tf.train.Int64List(value=[shape[2]])
+        rows=tf.train.Int64List(value=[shape[0]])
+        cols=tf.train.Int64List(value=[shape[1]])
+        channels=tf.train.Int64List(value=[shape[2]])
         shape=tf.train.Int64List(value=shape)
         
         img_str=tf.train.BytesList(value=[img.tostring()])
@@ -95,11 +97,11 @@ class generate_tf_records:
         # 
         features=tf.train.Features( feature={
             'File_name' : tf.train.Feature(bytes_list = img_name),
-            # 'rows' : tf.train.Feature(int64_list= rows),
-            # 'cols' :tf.train.Feature(int64_list=cols),
-            # 'channels' : tf.train.Feature (int64_list=channels),
+            'rows' : tf.train.Feature(int64_list= rows),
+            'cols' :tf.train.Feature(int64_list=cols),
+            'channels' : tf.train.Feature (int64_list=channels),
             'image' : tf.train.Feature(bytes_list= img_str),
-            'shape' : tf.train.Feature(int64_list= shape),
+            # 'shape' : tf.train.Feature(int64_list= shape),
             'classes': tf.train.Feature(bytes_list=objs_class),
             'xmin': tf.train.Feature(float_list=xmins),
             'xmax': tf.train.Feature(float_list=xmaxs),
